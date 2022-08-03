@@ -109,7 +109,7 @@ module.exports = function (User) {
 		}
 
 		if (data.email && userData.uid > 1) {
-			User.email.sendValidationEmail(userData.uid, {
+			await User.email.sendValidationEmail(userData.uid, {
 				email: data.email,
 				template: 'welcome',
 				subject: `[[email:welcome-to, ${meta.config.title || meta.config.browserTitle || 'NodeBB'}]]`,
