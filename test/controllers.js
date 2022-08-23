@@ -1476,33 +1476,6 @@ describe('Controllers', () => {
 			});
 		});
 
-		it('should export users posts', (done) => {
-			request(`${nconf.get('url')}/api/user/foo/export/posts`, { jar: jar }, (err, res, body) => {
-				assert.ifError(err);
-				assert.equal(res.statusCode, 200);
-				assert(body);
-				done();
-			});
-		});
-
-		it('should export users uploads', (done) => {
-			request(`${nconf.get('url')}/api/user/foo/export/uploads`, { jar: jar }, (err, res, body) => {
-				assert.ifError(err);
-				assert.equal(res.statusCode, 200);
-				assert(body);
-				done();
-			});
-		});
-
-		it('should export users profile', (done) => {
-			request(`${nconf.get('url')}/api/user/foo/export/profile`, { jar: jar }, (err, res, body) => {
-				assert.ifError(err);
-				assert.equal(res.statusCode, 200);
-				assert(body);
-				done();
-			});
-		});
-
 		it('should load notifications page', (done) => {
 			const notifications = require('../src/notifications');
 			const notifData = {

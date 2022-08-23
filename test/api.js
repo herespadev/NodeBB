@@ -24,6 +24,7 @@ const plugins = require('../src/plugins');
 const flags = require('../src/flags');
 const messaging = require('../src/messaging');
 const utils = require('../src/utils');
+const api = require('../src/api');
 
 describe('API', async () => {
 	let readApi = false;
@@ -190,12 +191,9 @@ describe('API', async () => {
 			path: 'files/test.png',
 		});
 
-		const socketUser = require('../src/socket.io/user');
 		const socketAdmin = require('../src/socket.io/admin');
 		// export data for admin user
-		await socketUser.exportProfile({ uid: adminUid }, { uid: adminUid });
-		await socketUser.exportPosts({ uid: adminUid }, { uid: adminUid });
-		await socketUser.exportUploads({ uid: adminUid }, { uid: adminUid });
+		await Promise.all(['profile', 'posts', 'uploads'].map(async type => api.users.generateExport({ uid: adminUid }, { uid: adminUid, type })));
 		await socketAdmin.user.exportUsersCSV({ uid: adminUid }, {});
 		// wait for export child process to complete
 		await wait(5000);
